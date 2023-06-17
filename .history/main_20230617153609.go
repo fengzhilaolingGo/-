@@ -3,7 +3,7 @@
 ! @Date: 2023-06-16 20:48:51
 
 	! @LastEditors: fengzhilaoling_Go fengzhilaoling_go@163.com
-	! @LastEditTime: 2023-06-17 16:26:06
+	! @LastEditTime: 2023-06-17 15:35:11
 
 ! @FilePath: \frne\main.go
 ! @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
@@ -12,11 +12,11 @@ package main
 
 import (
 	"fmt"
-	"fynetime/utils"
 	"image/color"
 	"log"
 	"os"
 	"time"
+	"tuxingfyne/utils"
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
