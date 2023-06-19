@@ -2,8 +2,8 @@
 ! @Author: fengzhilaoling_Go fengzhilaoling_go@163.com
 ! @Date: 2023-06-16 20:48:51
 
-	! @LastEditors: fengzhilaoling_Go fengzhilaoling_go@163.com
-	! @LastEditTime: 2023-06-19 21:13:40
+ ! @LastEditors: fengzhilaoling_Go fengzhilaoling_go@163.com
+ ! @LastEditTime: 2023-06-19 21:13:40
 
 ! @FilePath: \frne\main.go
 ! @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
@@ -45,7 +45,7 @@ func main() {
 	title.TextStyle.Bold = true
 	contentTitle := container.New(layout.NewCenterLayout(), title)
 	// ---------------------内容设置------------------------------
-	label1 := canvas.NewText("系统时区转换为太平洋标准时区:", black)
+	
 	input := widget.NewEntry()
 	input.SetPlaceHolder("时间格式: 2006-01-02 15:04:05")
 	name, _ := time.Now().Zone()
@@ -83,9 +83,8 @@ func main() {
 		log.Println("button", resultDate)
 	})
 
-	content1 := container.New(layout.NewVBoxLayout(), label1, input, zoneText, prompt, button, osResult)
+	content1 := container.New(layout.NewVBoxLayout(), input, zoneText, prompt, button, osResult)
 
-	label2 := canvas.NewText("系统时区转换为太平洋标准时区:", black)
 	losInput := widget.NewEntry()
 	losInput.SetPlaceHolder("时间格式: 2006-01-02 15:04:05")
 	loc, _ := time.LoadLocation("America/Los_Angeles")
@@ -125,7 +124,7 @@ func main() {
 		log.Println("button", date)
 	})
 
-	content2 := container.New(layout.NewVBoxLayout(), label2, losInput, losZoneText, losPrompt, losButton, result)
+	content2 := container.New(layout.NewVBoxLayout(), losInput, losZoneText, losPrompt, losButton, result)
 
 	// line := canvas.NewLine(color.Black)
 	// line.StrokeWidth = 1

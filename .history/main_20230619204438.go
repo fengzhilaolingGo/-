@@ -3,7 +3,7 @@
 ! @Date: 2023-06-16 20:48:51
 
 	! @LastEditors: fengzhilaoling_Go fengzhilaoling_go@163.com
-	! @LastEditTime: 2023-06-19 21:13:40
+	! @LastEditTime: 2023-06-19 20:43:05
 
 ! @FilePath: \frne\main.go
 ! @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
@@ -45,9 +45,8 @@ func main() {
 	title.TextStyle.Bold = true
 	contentTitle := container.New(layout.NewCenterLayout(), title)
 	// ---------------------内容设置------------------------------
-	label1 := canvas.NewText("系统时区转换为太平洋标准时区:", black)
 	input := widget.NewEntry()
-	input.SetPlaceHolder("时间格式: 2006-01-02 15:04:05")
+	input.SetPlaceHolder("时间格式: 2006-01-02 15:04:05 & 15:04:05")
 	name, _ := time.Now().Zone()
 	nowZone := fmt.Sprintf("当前时区: %s", name)
 	zoneText := canvas.NewText(nowZone, blue)
@@ -83,30 +82,28 @@ func main() {
 		log.Println("button", resultDate)
 	})
 
-	content1 := container.New(layout.NewVBoxLayout(), label1, input, zoneText, prompt, button, osResult)
+	content1 := container.New(layout.NewVBoxLayout(), input, zoneText, prompt, button, osResult)
 
-	label2 := canvas.NewText("系统时区转换为太平洋标准时区:", black)
 	losInput := widget.NewEntry()
-	losInput.SetPlaceHolder("时间格式: 2006-01-02 15:04:05")
+	losInput.SetPlaceHolder("时间格式: 2006-01-02 15:04:05 & 15:04:05")
 	loc, _ := time.LoadLocation("America/Los_Angeles")
 	// nowTime := time.Now()
 	// time.ParseInLocation()
 	// nowTimeStr := time.Now().Format("2006-01-02 15:04:05")
 	losZone := fmt.Sprintf("当前时区: %s", loc.String())
 	losZoneText := canvas.NewText(losZone, blue)
-	zoneName, _ := time.Now().Zone()
-	losPrompt := canvas.NewText(fmt.Sprintf("转换为系统时区: %s", zoneName), blue)
+	losPrompt := canvas.NewText("转换为系统shuq", blue)
 	result := canvas.NewText("", blue)
 	losButton := widget.NewButton("转换", func() {
 		// 检查input字符串是否符合格式
-		if !utils.Check_input(losInput) {
-			losInput.Text = utils.ConvertLosAngeles()
-			losInput.Refresh()
+		if !utils.Check_input(input) {
+			input.Text = time.Now().Format("2006-01-02 15:04:05")
+			input.Refresh()
 			return
 		}
 		// layout1 := "2006-01-02 15:04:05"
 		// layout2 := "15:04:05"
-		layout1Bool, layout2Bool := utils.Check_input_format(losInput.Text)
+		layout1Bool, layout2Bool := utils.Check_input_format(input.Text)
 		if !layout1Bool {
 			if !layout2Bool {
 				result.Text = fmt.Sprintf("%v", "时间字符串不符合格式请重新输入!")
@@ -116,16 +113,17 @@ func main() {
 			}
 		}
 		// 获取input中字符串
-		date := utils.GetLocalTime(losInput.Text)
+		date, _ := utils.GetUTCTime(input.Text)
 		log.Println("date", date)
-		result.Text = fmt.Sprintf("%v", date)
+		resultDate := utils.GetLosAngeles(date)
+		result.Text = fmt.Sprintf("%v", resultDate)
 		result.Color = green
 		result.Refresh()
 
-		log.Println("button", date)
+		log.Println("button", resultDate)
 	})
 
-	content2 := container.New(layout.NewVBoxLayout(), label2, losInput, losZoneText, losPrompt, losButton, result)
+	content2 := container.New(layout.NewVBoxLayout(), losInput, losZoneText, losPrompt, losButton, result)
 
 	// line := canvas.NewLine(color.Black)
 	// line.StrokeWidth = 1
@@ -137,7 +135,7 @@ func main() {
 	// content.Resize(fyne.NewSize(0, 1))
 	// content.Refresh()
 
-	body := container.New(layout.NewGridLayout(2), content1, content2)
+	body := container.New(layout.NewGridLayout(3), content1, content2)
 
 	context := container.New(layout.NewVBoxLayout(), contentTitle, body)
 	myWindow.Resize(fyne.NewSize(600, 500))
