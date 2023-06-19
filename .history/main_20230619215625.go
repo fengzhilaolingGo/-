@@ -137,7 +137,7 @@ func main() {
 	body := container.NewBorder(nil, nil, content1, nil, content2)
 
 	context := container.New(layout.NewVBoxLayout(), contentTitle, body)
-	myWindow.Resize(fyne.NewSize(500, 500))
+	myWindow.Resize(fyne.NewSize(600, 500))
 	myWindow.SetContent(context)
 	myWindow.ShowAndRun()
 }

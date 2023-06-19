@@ -3,7 +3,7 @@
 ! @Date: 2023-06-16 20:48:51
 
 	! @LastEditors: fengzhilaoling_Go fengzhilaoling_go@163.com
-	! @LastEditTime: 2023-06-19 21:52:48
+	! @LastEditTime: 2023-06-19 21:44:46
 
 ! @FilePath: \frne\main.go
 ! @Description: 这是默认设置,请设置`customMade`, 打开koroFileHeader查看配置 进行设置: https://github.com/OBKoro1/koro1FileHeader/wiki/%E9%85%8D%E7%BD%AE
@@ -130,14 +130,17 @@ func main() {
 	line := canvas.NewLine(color.Black)
 	line.StrokeWidth = 1
 
-	a := container.NewHBox(line)
-	a.Resize(fyne.NewSize(1, 200))
+	// content := container.New(
+	// 	layout.NewMaxLayout(),
+	// 	line,
+	// )
+	// content.Resize(fyne.NewSize(0, 1))
+	// content.Refresh()
 
-	// body := container.New(layout.NewGridLayout(3), content1, a, content2)
-	body := container.NewBorder(nil, nil, content1, nil, content2)
+	body := container.New(layout.NewGridLayout(2), content1, content2)
 
 	context := container.New(layout.NewVBoxLayout(), contentTitle, body)
-	myWindow.Resize(fyne.NewSize(500, 500))
+	myWindow.Resize(fyne.NewSize(600, 500))
 	myWindow.SetContent(context)
 	myWindow.ShowAndRun()
 }

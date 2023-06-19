@@ -134,7 +134,7 @@ func main() {
 	a.Resize(fyne.NewSize(1, 200))
 
 	// body := container.New(layout.NewGridLayout(3), content1, a, content2)
-	body := container.NewBorder(nil, nil, content1, nil, content2)
+	body := container.NewBorder(a, nil, content1, line, content2)
 
 	context := container.New(layout.NewVBoxLayout(), contentTitle, body)
 	myWindow.Resize(fyne.NewSize(500, 500))
